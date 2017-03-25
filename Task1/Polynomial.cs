@@ -8,34 +8,97 @@ namespace Task1
 {
     public class Polynomial: ICloneable
     {
+        #region Fields
+
         private double[] coefficients;
 
         private int power;
+
+        private const float Precision = 0.0000001f;
+
+        #endregion
+
+        #region Properties
+
+        public int Power => power;
+
+        public double[] Coefficients => (double[])coefficients.Clone();
+
+        #endregion  
+
+        #region Constructors
+
+        public Polynomial(double value)
+        {
+            this.coefficients = new double[1] {value};
+            this.power = 0;
+        }
+
+        public Polynomial(double value1, double value2)
+        {
+            this.coefficients = new double[2] {value1, value2};
+            this.power = 1;
+        }
+
+        public Polynomial(double value1, double value2, double value3)
+        {
+            this.coefficients = new double[3] { value1, value2, value3 };
+            this.power = 2;
+        }
 
         public Polynomial(params double[] coefficients)
         {
             if (coefficients == null)
                 throw new ArgumentNullException(nameof(coefficients));
 
+            if (coefficients.Length == 0)
+            {
+                this.power = 0;
+                this.coefficients = null;
+                return;
+            }
 
-
-            this.coefficients = coefficients;
-            power = coefficients.Length;
+            this.power = coefficients.Length - 1;
+            for (int i = coefficients.Length - 1; i >= 0; i--)
+                if (i == 0 || coefficients[i] != 0)
+                {
+                    this.power = i;
+                    break;
+                }
+            this.coefficients = new double[power + 1];
+            Array.Copy(coefficients, this.coefficients, power + 1);
         }
+
+        #endregion
+
+        #region Public Methods
 
         public object Clone()
         {
             return new Polynomial(this.coefficients);
         }
 
-        public double Compute(double x)
+        public bool Equals(Polynomial polynomial)
         {
-            double result = 0;
+            if (ReferenceEquals(polynomial, null)) return false;
+            if (ReferenceEquals(this, polynomial)) return true;
+            if (this.power != polynomial.Power) return false;
 
-            for (int i = power - 1; i >= 0; i--)
-                result = result * x + coefficients[i];
+            for (int i = 0; i < this.power; i++)
+                if (Math.Abs(this.coefficients[i] - polynomial.coefficients[i]) < Precision)
+                    return false;
 
-            return result;
+            return true;
+        }
+
+        public static bool operator ==(Polynomial value1, Polynomial value2)
+        {
+            return true;
+        }
+
+        public static bool operator !=(Polynomial value1, Polynomial value2)
+        {
+            return true;
         }
 
         public static Polynomial operator +(Polynomial value1, Polynomial value2)
@@ -93,6 +156,18 @@ namespace Task1
                     resultCoefficients[i + j] = value1.coefficients[i] * value2.coefficients[j];
 
             return new Polynomial(resultCoefficients);
-        }  
+        }
+
+        public double Compute(double x)
+        {
+            double result = 0;
+
+            for (int i = power - 1; i >= 0; i--)
+                result = result * x + coefficients[i];
+
+            return result;
+        }
+
+        #endregion
     }
 }
