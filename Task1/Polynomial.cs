@@ -85,20 +85,49 @@ namespace Task1
             if (this.power != polynomial.Power) return false;
 
             for (int i = 0; i < this.power; i++)
-                if (Math.Abs(this.coefficients[i] - polynomial.coefficients[i]) < Precision)
+                if (Math.Abs(this.coefficients[i] - polynomial.coefficients[i]) > Precision)
                     return false;
 
             return true;
         }
 
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as Polynomial);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.ToString().GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+
+            int power = 0;
+            for (int i = 0; i < coefficients.Length; i++)
+            {
+                result.AppendFormat($"{coefficients[i]}x^{power++}");
+                if (i != coefficients.Length - 1) result.Append(" + ");
+            }
+
+            return result.ToString();
+        }
+
         public static bool operator ==(Polynomial value1, Polynomial value2)
         {
-            return true;
+            if (ReferenceEquals(value1, null) && ReferenceEquals(value2, null))
+                return true;
+            if (ReferenceEquals(value1, null) || ReferenceEquals(value2, null))
+                return false;
+
+            return value1.Equals(value1);
         }
 
         public static bool operator !=(Polynomial value1, Polynomial value2)
         {
-            return true;
+            return !(value1 == value2);
         }
 
         public static Polynomial operator +(Polynomial value1, Polynomial value2)
@@ -115,7 +144,7 @@ namespace Task1
 
             int resultPower = (value1.power > value2.power) ? value2.power : value1.power;
 
-            for (int i = 0; i < resultPower; i++)
+            for (int i = 0; i < resultPower + 1; i++)
                 resultCoefficients[i] = value1.coefficients[i] + value2.coefficients[i];
 
             return new Polynomial(resultCoefficients);
@@ -158,15 +187,33 @@ namespace Task1
             return new Polynomial(resultCoefficients);
         }
 
+        public static Polynomial Add(Polynomial leftPoly, Polynomial rightPoly)
+        {
+            return leftPoly + rightPoly;
+        }
+
+        public static Polynomial Substract(Polynomial leftPoly, Polynomial rightPoly)
+        {
+            return leftPoly - rightPoly;
+        }
+
+        public static Polynomial Multiple(Polynomial leftPoly, Polynomial rightPoly)
+        {
+            return leftPoly * rightPoly;
+        }
+
         public double Compute(double x)
         {
+
             double result = 0;
 
-            for (int i = power - 1; i >= 0; i--)
-                result = result * x + coefficients[i];
-
+            for (int i = power; i >= 0; i--)
+            {
+                result *= x;
+                result += coefficients[i];
+            }
             return result;
-        }
+        }   
 
         #endregion
     }
