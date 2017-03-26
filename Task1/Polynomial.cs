@@ -73,11 +73,6 @@ namespace Task1
 
         #region Public Methods
 
-        public object Clone()
-        {
-            return new Polynomial(this.coefficients);
-        }
-
         public bool Equals(Polynomial polynomial)
         {
             if (ReferenceEquals(polynomial, null)) return false;
@@ -91,15 +86,11 @@ namespace Task1
             return true;
         }
 
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as Polynomial);
-        }
+        public override bool Equals(object obj) => this.Equals(obj as Polynomial);
 
-        public override int GetHashCode()
-        {
-            return this.ToString().GetHashCode();
-        }
+        public override int GetHashCode() => this.ToString().GetHashCode();
+
+        public object Clone() => new Polynomial(this.coefficients);
 
         public override string ToString()
         {
@@ -125,11 +116,8 @@ namespace Task1
             return value1.Equals(value1);
         }
 
-        public static bool operator !=(Polynomial value1, Polynomial value2)
-        {
-            return !(value1 == value2);
-        }
-
+        public static bool operator !=(Polynomial value1, Polynomial value2) => !(value1 == value2);
+        
         public static Polynomial operator +(Polynomial value1, Polynomial value2)
         {
             if (value1 == null && value2 == null)
@@ -187,24 +175,14 @@ namespace Task1
             return new Polynomial(resultCoefficients);
         }
 
-        public static Polynomial Add(Polynomial leftPoly, Polynomial rightPoly)
-        {
-            return leftPoly + rightPoly;
-        }
+        public static Polynomial Add(Polynomial leftPoly, Polynomial rightPoly) => leftPoly + rightPoly;
 
-        public static Polynomial Substract(Polynomial leftPoly, Polynomial rightPoly)
-        {
-            return leftPoly - rightPoly;
-        }
+        public static Polynomial Substract(Polynomial leftPoly, Polynomial rightPoly) => leftPoly - rightPoly;
 
-        public static Polynomial Multiple(Polynomial leftPoly, Polynomial rightPoly)
-        {
-            return leftPoly * rightPoly;
-        }
+        public static Polynomial Multiple(Polynomial leftPoly, Polynomial rightPoly) => leftPoly * rightPoly;
 
         public double Compute(double x)
         {
-
             double result = 0;
 
             for (int i = power; i >= 0; i--)

@@ -28,7 +28,7 @@ namespace Task2
                 if (isSwap == false)
                     break;
             }
-        }
+        }   
 
         private static void Swap<T>(ref T value1, ref T value2)
         {
