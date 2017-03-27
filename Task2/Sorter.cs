@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task2
 {
@@ -12,7 +8,7 @@ namespace Task2
     public static class Sorter
     {
         /// <summary>
-        /// Sorts the elements in an Array using the specified Comparison.
+        /// Sorts the elements in an jagged array using the specified Comparison.
         /// </summary>
         /// <param name="array">The jagged, zero-based Array to sort.</param>
         /// <param name="comparison">The comparison to use when comparing elements.</param>
@@ -33,7 +29,7 @@ namespace Task2
             {
                 bool isSwap = false;
                 for (int j = 1; j < array.Length - i; j++)
-                    if (comparison(array[j - 1], array[j]) < 0)
+                    if (comparison(array[j - 1], array[j]) > 0)
                     {
                         Swap(ref array[j - 1], ref array[j]);
                         isSwap = true;
