@@ -4,7 +4,7 @@ using System.Text;
 namespace Task1
 {
     /// <summary>
-    /// Represents polinomials.
+    /// Represents immutable polinomials.
     /// </summary>
     /// <seealso cref="System.ICloneable" />
     public class Polynomial: ICloneable
@@ -272,12 +272,42 @@ namespace Task1
             return new Polynomial(resultCoefficients);
         }
 
+        /// <summary>
+        /// Adds the specified <paramref name="leftPl"/> with <paramref name="rightPl"/>.
+        /// </summary>
+        /// <param name="leftPl">The left <see cref="Polynomial"/>.</param>
+        /// <param name="rightPl">The right <see cref="Polynomial"/>.</param>
+        /// <returns>Returns result of addition</returns>
         public static Polynomial Add(Polynomial leftPl, Polynomial rightPl) => leftPl + rightPl;
 
-        public static Polynomial Substract(Polynomial leftPl, Polynomial rightPl) => leftPl - rightPl;
+        /// <summary>
+        /// Substracts the specified <paramref name="leftPl"/> from <paramref name="rightPl"/>.
+        /// </summary>
+        /// <param name="leftPl">The left <see cref="Polynomial"/>.</param>
+        /// <param name="rightPl">The right <see cref="Polynomial"/>.</param>
+        /// <returns>Returns result of subtraction.</returns>
+        public static Polynomial Subtract(Polynomial leftPl, Polynomial rightPl) => leftPl - rightPl;
 
-        public static Polynomial Multiple(Polynomial leftPl, Polynomial rightPl) => leftPl * rightPl;
+        /// <summary>
+        /// Multiplies the specified <paramref name="leftPl"/> with <paramref name="rightPl"/>.
+        /// </summary>
+        /// <param name="leftPl">The left <see cref="Polynomial"/>.</param>
+        /// <param name="rightPl">The right <see cref="Polynomial"/>.</param>
+        /// <returns>Returns result of multiplication</returns>
+        public static Polynomial Multiply(Polynomial leftPl, Polynomial rightPl) => leftPl * rightPl;
 
+        public double this[int power]
+        {
+            get
+            {
+                if (power < 0)
+                    throw new ArgumentOutOfRangeException
+                        ($"{nameof(power)} cannot be less than zero");
+                if (power > this.power)
+                    return 0;
+                return coefficients[power];
+            }
+        }
         #endregion
     }
 }
