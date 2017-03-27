@@ -119,5 +119,197 @@ namespace Task1.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void ToString_3Returns()
+        {
+            Polynomial a = new Polynomial(4, 0, 3, 4);
+
+            string expected = "4x^0 + 3x^2 + 4x^3";
+
+            string actual = a.ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void OperatorPlus_positiveValues()
+        {
+
+            Polynomial a = new Polynomial(1, 2, 3, 4, 5, 6),
+                       b = new Polynomial(2, 3, 4, 5, 6);
+            Polynomial expected = new Polynomial(3, 5, 7, 9, 11, 6);
+
+            Polynomial actual = a + b;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorPlus_negativeValues()
+        {
+
+            Polynomial a = new Polynomial(-1, -2, -3, -4, -5, -6),
+                       b = new Polynomial(2, 3, 4, 5, 6);
+            Polynomial expected = new Polynomial(1, 1, 1, 1, 1, -6);
+
+            Polynomial actual = a + b;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorPlus_oneNullValue()
+        {
+
+            Polynomial a = new Polynomial(-1, -2, -3, -4, -5, -6),
+                       b = null;
+            Polynomial expected = new Polynomial(-1, -2, -3, -4, -5, -6);
+
+            Polynomial actual = a + b;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorPlus_twoNullValues()
+        {
+
+            Polynomial a = null,
+                       b = null;
+            Polynomial expected = null;
+
+            Polynomial actual = a + b;
+
+            Assert.IsTrue(actual == expected);
+
+        }
+
+        [Test]
+        public void OperatorUnaryMinus_positiveValues()
+        {
+
+            Polynomial a = new Polynomial(1, 2, 3, 4, 5, 6);
+            Polynomial expected = new Polynomial(-1, -2, -3, -4, -5, -6);
+
+            Polynomial actual = -a;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorUnaryMinus_negativeValues()
+        {
+
+            Polynomial a = new Polynomial(-1, -2, -3, -4, -5, -6);
+            Polynomial expected = new Polynomial(1, 2, 3, 4, 5, 6);
+
+            Polynomial actual = -a;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorUnaryMinus_nullValue()
+        {
+
+            Polynomial a = null;
+            Polynomial expected = null;
+
+            Polynomial actual = -a;
+
+            Assert.IsTrue(actual == expected);
+
+        }
+
+        [Test]
+        public void OperatorMinus_positiveValues()
+        {
+
+            Polynomial a = new Polynomial(1, 2, 3, 4, 5, 6),
+                       b = new Polynomial(2, 3, 4, 5, 6);
+            Polynomial expected = new Polynomial(-1, -1, -1, -1, -1, 6);
+
+            Polynomial actual = a - b;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorMinus_negativeValues()
+        {
+
+            Polynomial a = new Polynomial(-1, -2, -3, -4, -5, -6),
+                       b = new Polynomial(-2, -3, -4, -5, -6);
+            Polynomial expected = new Polynomial(1, 1, 1, 1, 1, -6);
+
+            Polynomial actual = a - b;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorMinus_oneNullValue()
+        {
+
+            Polynomial a = new Polynomial(-1, -2, -3, -4, -5, -6),
+                       b = null;
+            Polynomial expected = new Polynomial(-1, -2, -3, -4, -5, -6);
+
+            Polynomial actual = a - b;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorMinus_twoNullValues()
+        {
+
+            Polynomial a = null,
+                       b = null;
+            Polynomial expected = null;
+
+            Polynomial actual = a - b;
+
+            Assert.IsTrue(actual == expected);
+
+        }
+
+        [Test]
+        public void OperatorСomposition_positiveValues()
+        {
+
+            Polynomial a = new Polynomial(1, 2, 3),
+                       b = new Polynomial(2, 3);
+            Polynomial expected = new Polynomial(2, 7, 12, 9);
+
+            Polynomial actual = a * b;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
+        [Test]
+        public void OperatorСomposition_negativeValues()
+        {
+
+            Polynomial a = new Polynomial(-1, -2, -3),
+                       b = new Polynomial(2, 3);
+            Polynomial expected = new Polynomial(-2, -7, -12, -9);
+
+            Polynomial actual = a * b;
+
+            Assert.IsTrue(actual.Equals(expected));
+
+        }
+
     }
 }
