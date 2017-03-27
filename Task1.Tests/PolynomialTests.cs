@@ -97,7 +97,7 @@ namespace Task1.Tests
         }
 
         [Test]
-        public void ToString_0_1_Returns()
+        public void ToString_negativeCoef_Returns()
         {
             Polynomial a = new Polynomial(1, -2, 3);
 
@@ -109,7 +109,7 @@ namespace Task1.Tests
         }
 
         [Test]
-        public void ToString_Returns()
+        public void ToString_positiveCoefs_Returns()
         {
             Polynomial a = new Polynomial(4, 2, 3, 4);
 
@@ -121,7 +121,7 @@ namespace Task1.Tests
         }
 
         [Test]
-        public void ToString_3Returns()
+        public void ToString_nullCoef_Returns()
         {
             Polynomial a = new Polynomial(4, 0, 3, 4);
 
