@@ -5,7 +5,7 @@ namespace Task2.Tests
     /// <summary>
     /// Provides methods to compare two sz-arrays by specified order
     /// </summary>
-    public static class Comparisons
+    public class RowMaxComparerAscending : IComparer<int[]>
     {
         /// <summary>
         /// Compares two sz-arrays by row's max elements by ascending order.
@@ -17,7 +17,7 @@ namespace Task2.Tests
         /// <paramref name="b"/>. Zero if sums are equals. Less than
         /// 0 if maximum element in <paramref name="a"/> is less than
         /// maximum element in <paramref name="b"/></returns>
-        public static int RowMaxComparatorAscending(int[] a, int[] b)
+        public int Compare(int[] a, int[] b)
         {
             if (ReferenceEquals(a, b))
                 return 0;
@@ -31,7 +31,13 @@ namespace Task2.Tests
 
             return maxElementA.CompareTo(maxElementB);
         }
+    }
 
+    /// <summary>
+    /// Provides methods to compare two sz-arrays by specified order
+    /// </summary>
+    public class RowMaxComparerDescending : IComparer<int[]>
+    {
         /// <summary>
         /// Compares two sz-arrays by row's max elements by descending order.
         /// </summary>
@@ -42,7 +48,7 @@ namespace Task2.Tests
         /// <paramref name="a"/>. Zero if sums are equals. Less than
         /// 0 if maximum element in <paramref name="b"/> is less than
         /// maximum element in <paramref name="a"/></returns>
-        public static int RowMaxComparatorDescending(int[] a, int[] b)
+        public int Compare(int[] a, int[] b)
         {
             if (ReferenceEquals(a, b))
                 return 0;
@@ -57,6 +63,13 @@ namespace Task2.Tests
             return maxElementB.CompareTo(maxElementA);
         }
 
+    }
+
+    /// <summary>
+    /// Provides methods to compare two sz-arrays by specified order
+    /// </summary>
+    public class RowMinComparerDescinding : IComparer<int[]>
+    {
         /// <summary>
         /// Compares two sz-arrays by maximum element by descending order.
         /// </summary>
@@ -67,7 +80,7 @@ namespace Task2.Tests
         /// <paramref name="a"/>. Zero if sums are equals. Less than
         /// 0 if minimum element in <paramref name="b"/> is less than
         /// minimum element in <paramref name="a"/></returns>
-        public static int RowMinComparatorDescinding(int[] a, int[] b)
+        public int Compare(int[] a, int[] b)
         {
             if (ReferenceEquals(a, b))
                 return 0;
@@ -81,8 +94,13 @@ namespace Task2.Tests
 
             return minElementB.CompareTo(minElementA);
         }
+    }
 
-
+    /// <summary>
+    /// Provides methods to compare two sz-arrays by specified order
+    /// </summary>
+    public class RowMinComparerAscending : IComparer<int[]>
+    {
         /// <summary>
         /// Compares two sz-arrays by maximum element by ascending order.
         /// </summary>
@@ -93,7 +111,7 @@ namespace Task2.Tests
         /// <paramref name="b"/>. Zero if sums are equals. Less than
         /// 0 if minimum element in <paramref name="a"/> is less than
         /// minimum element in <paramref name="b"/></returns>
-        public static int RowMinComparatorAscending(int[] a, int[] b)
+        public int Compare(int[] a, int[] b)
         {
             if (ReferenceEquals(a, b))
                 return 0;
@@ -107,7 +125,14 @@ namespace Task2.Tests
 
             return minElementA.CompareTo(minElementB);
         }
+    }
 
+
+    /// <summary>
+    /// Provides methods to compare two sz-arrays by specified order
+    /// </summary>
+    public class RowSumComparerAscending : IComparer<int[]>
+    {
         /// <summary>
         /// Compares two sz-arrays by sum of elements by ascending order.
         /// </summary>
@@ -118,7 +143,7 @@ namespace Task2.Tests
         /// <paramref name="b"/>. Zero if sums are equals. Less than
         /// 0 if sum of elements in <paramref name="a"/> is less than
         /// sum of elements in <paramref name="b"/></returns>
-        public static int RowSumComparatorAscending(int[] a, int[] b)
+        public int Compare(int[] a, int[] b)
         {
             if (ReferenceEquals(a, b))
                 return 0;
@@ -132,7 +157,13 @@ namespace Task2.Tests
 
             return sumA.CompareTo(sumB);
         }
+    }
 
+    /// <summary>
+    /// Provides methods to compare two sz-arrays by specified order
+    /// </summary>
+    public class RowSumComparerDescinding : IComparer<int[]>
+    {
         /// <summary>
         /// Compares two sz-arrays by sum of elements by descending order.
         /// </summary>
@@ -143,7 +174,7 @@ namespace Task2.Tests
         /// <paramref name="a"/>. Zero if sums are equals. Less than
         /// 0 if sum of elements in <paramref name="b"/> is less than
         /// sum of elements in <paramref name="a"/></returns>
-        public static int RowSumComparatorDescinding(int[] a, int[] b)
+        public int Compare(int[] a, int[] b)
         {
             if (ReferenceEquals(a, b))
                 return 0;
@@ -159,3 +190,4 @@ namespace Task2.Tests
         }
     }
 }
+

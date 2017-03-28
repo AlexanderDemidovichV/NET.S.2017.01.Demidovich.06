@@ -11,25 +11,25 @@ namespace Task2
         /// Sorts the elements in an jagged array using the specified Comparison.
         /// </summary>
         /// <param name="array">The jagged, zero-based Array to sort.</param>
-        /// <param name="comparison">The comparison to use when comparing elements.</param>
+        /// <param name="comparer">The comparer to use when comparing elements.</param>
         /// <exception cref="System.ArgumentNullException">
         /// array is null
         /// or
-        /// comparison is null
+        /// comparer is null
         /// </exception>
-        public static void Sort(this int[][] array, Comparison<int[]> comparison)
+        public static void Sort(this int[][] array, IComparer<int[]> comparer)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
 
-            if (comparison == null)
-                throw new ArgumentNullException(nameof(comparison));
+            if (comparer == null)
+                throw new ArgumentNullException(nameof(comparer));
 
             for (int i = 0; i < array.Length; i++)
             {
                 bool isSwap = false;
                 for (int j = 1; j < array.Length - i; j++)
-                    if (comparison(array[j - 1], array[j]) > 0)
+                    if (comparer.Compare(array[j - 1], array[j]) > 0)
                     {
                         Swap(ref array[j - 1], ref array[j]);
                         isSwap = true;
@@ -39,11 +39,11 @@ namespace Task2
             }
         }   
 
-        private static void Swap<T>(ref T value1, ref T value2)
+        private static void Swap<T>(ref T lhs, ref T rhs)
         {
-            T temp = value1;
-            value1 = value2;
-            value2 = temp;
+            T temp = lhs;
+            lhs = rhs;
+            rhs = temp;
         }
     }
 }

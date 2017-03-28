@@ -24,7 +24,7 @@ namespace Task2.Tests
                 new int[] {4}
             };
 
-            array1.Sort(Comparisons.RowMaxComparatorAscending);
+            array1.Sort(new RowMaxComparerAscending());
 
             Assert.AreEqual(array1.Length, array2.Length);
             for (int i = 0; i < array1.Length; i++)
@@ -58,7 +58,7 @@ namespace Task2.Tests
                 new int[] {1}
             };
 
-            array1.Sort(Comparisons.RowMaxComparatorDescending);
+            array1.Sort(new RowMaxComparerDescending());
 
             Assert.AreEqual(array1.Length, array2.Length);
             for (int i = 0; i < array1.Length; i++)
@@ -95,7 +95,7 @@ namespace Task2.Tests
                 new int[] {5, 6}
             };
 
-            array1.Sort(Comparisons.RowMinComparatorAscending);
+            array1.Sort(new RowMinComparerAscending());
 
             Assert.AreEqual(array1.Length, array2.Length);
             for (int i = 0; i < array1.Length; i++)
@@ -132,7 +132,7 @@ namespace Task2.Tests
                 new int[] {1}
             };
 
-            array1.Sort(Comparisons.RowMinComparatorDescinding);
+            array1.Sort(new RowMinComparerDescinding());
 
             Assert.AreEqual(array1.Length, array2.Length);
             for (int i = 0; i < array1.Length; i++)
@@ -169,7 +169,7 @@ namespace Task2.Tests
                 new int[] {1}
             };
 
-            array1.Sort(Comparisons.RowSumComparatorDescinding);
+            array1.Sort(new RowSumComparerDescinding());
 
             Assert.AreEqual(array1.Length, array2.Length);
             for (int i = 0; i < array1.Length; i++)
@@ -206,7 +206,7 @@ namespace Task2.Tests
                 new int[] {5, 6}
             };
 
-            array1.Sort(Comparisons.RowSumComparatorAscending);
+            array1.Sort(new RowSumComparerAscending());
 
             Assert.AreEqual(array1.Length, array2.Length);
             for (int i = 0; i < array1.Length; i++)
