@@ -26,47 +26,9 @@ namespace Task1
         /// </summary>
         public int Power => power;
 
-        /// <summary>
-        /// Coefficients of <see cref="Polynomial"/>, index is power of <see cref="Polynomial"/> element.
-        /// </summary>
-        public double[] Coefficients => (double[])coefficients.Clone();
-
         #endregion  
 
         #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the zero-degree <see cref="Polynomial"/> class that is specified by coefficient.
-        /// </summary>
-        /// <param name="value">Coefficient of zero-degree polynomial.</param>
-        public Polynomial(double value)
-        {
-            this.coefficients = new double[1] {value};
-            this.power = 0;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the first-degree <see cref="Polynomial"/> that is specified by coefficients.
-        /// </summary>
-        /// <param name="value1">First coefficient of first-degree polynomial.</param>
-        /// <param name="value2">Second coefficient of first-degree polynomial.</param>
-        public Polynomial(double value1, double value2)
-        {
-            this.coefficients = new double[2] {value1, value2};
-            this.power = 1;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the first-degree <see cref="Polynomial"/> that is specified by coefficients
-        /// </summary>
-        /// <param name="value1">First coefficient of third-degree polynomial</param>
-        /// <param name="value2">Second coefficient of first-degree polynomial.</param>
-        /// <param name="value3">Third coefficient of third-degree polynomial.</param>
-        public Polynomial(double value1, double value2, double value3)
-        {
-            this.coefficients = new double[3] { value1, value2, value3 };
-            this.power = 2;
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Polynomial"/> class that is spcified by coefficients.
@@ -75,7 +37,7 @@ namespace Task1
         /// <exception cref="System.ArgumentNullException"><paramref name="coefficients"/> is null</exception>
         public Polynomial(params double[] coefficients)
         {
-            if (coefficients == null)
+            if (ReferenceEquals(coefficients, null))
                 throw new ArgumentNullException(nameof(coefficients));
 
             if (coefficients.Length == 0)
@@ -190,66 +152,66 @@ namespace Task1
         /// <summary>
         /// Determines whether the specified <see cref="Polynomial"/> instances are considered equal.
         /// </summary>
-        /// <param name="leftPl">The first <see cref="Polynomial"/> to compare.</param>
-        /// <param name="rightPl">The second <see cref="Polynomial"/> to compare.</param>
+        /// <param name="lhs">The first <see cref="Polynomial"/> to compare.</param>
+        /// <param name="rhs">The second <see cref="Polynomial"/> to compare.</param>
         /// <returns>
         /// <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator ==(Polynomial leftPl, Polynomial rightPl)
+        public static bool operator ==(Polynomial lhs, Polynomial rhs)
         {
-            if (ReferenceEquals(leftPl, null) && ReferenceEquals(rightPl, null))
+            if (ReferenceEquals(lhs, null) && ReferenceEquals(rhs, null))
                 return true;
-            if (ReferenceEquals(leftPl, null) || ReferenceEquals(rightPl, null))
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null))
                 return false;
 
-            return leftPl.Equals(leftPl);
+            return lhs.Equals(lhs);
         }
 
         /// <summary>
         /// Determines whether the specified <see cref="Polynomial"/> instances are considered not equal.
         /// </summary>
-        /// <param name="leftPl">The first <see cref="Polynomial"/> to compare.</param>
-        /// <param name="rightPl">The second <see cref="Polynomial"/> to compare.</param>
+        /// <param name="lhs">The first <see cref="Polynomial"/> to compare.</param>
+        /// <param name="rhs">The second <see cref="Polynomial"/> to compare.</param>
         /// <returns>
         /// <c>false</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>true</c>.
         /// </returns>
-        public static bool operator !=(Polynomial leftPl, Polynomial rightPl) => !(leftPl == rightPl);
+        public static bool operator !=(Polynomial lhs, Polynomial rhs) => !(lhs == rhs);
 
-        public static Polynomial operator +(Polynomial leftPl, Polynomial rightPl)
+        public static Polynomial operator +(Polynomial lhs, Polynomial rhs)
         {
-            if (leftPl == null && rightPl == null)
+            if (ReferenceEquals(lhs, null) && ReferenceEquals(rhs, null))
                 return null;
-            if (leftPl == null)
-                return new Polynomial(rightPl.coefficients);
-            if (rightPl == null)
-                return new Polynomial(leftPl.coefficients);
+            if (ReferenceEquals(lhs, null))
+                return new Polynomial(rhs.coefficients);
+            if (ReferenceEquals(rhs, null))
+                return new Polynomial(lhs.coefficients);
 
-            double[] resultCoefficients = (leftPl.power > rightPl.power) ? 
-                (double[])leftPl.coefficients.Clone() : (double[])rightPl.coefficients.Clone();
+            double[] resultCoefficients = (lhs.power > rhs.power) ? 
+                (double[])lhs.coefficients.Clone() : (double[])rhs.coefficients.Clone();
 
-            int resultPower = (leftPl.power > rightPl.power) ? rightPl.power : leftPl.power;
+            int resultPower = (lhs.power > rhs.power) ? rhs.power : lhs.power;
 
             for (int i = 0; i < resultPower + 1; i++)
-                resultCoefficients[i] = leftPl.coefficients[i] + rightPl.coefficients[i];
+                resultCoefficients[i] = lhs.coefficients[i] + rhs.coefficients[i];
 
             return new Polynomial(resultCoefficients);
         }
 
-        public static Polynomial operator -(Polynomial leftPl, Polynomial rightPl)
+        public static Polynomial operator -(Polynomial lhs, Polynomial rhs)
         {
-            if (leftPl == null && rightPl == null)
+            if (ReferenceEquals(lhs, null) && ReferenceEquals(rhs, null))
                 return null;
-            if (leftPl == null)
-                return new Polynomial(rightPl.coefficients);
-            if (rightPl == null)
-                return new Polynomial(leftPl.coefficients);
+            if (ReferenceEquals(lhs, null))
+                return new Polynomial(rhs.coefficients);
+            if (ReferenceEquals(rhs, null))
+                return new Polynomial(lhs.coefficients);
 
-            return leftPl + (-rightPl);
+            return lhs + (-rhs);
         }
 
         public static Polynomial operator -(Polynomial pl)
         {
-            if (pl == null)
+            if (ReferenceEquals(pl, null))
                 return null;
 
             double[] resultCoefficients = new double[pl.power + 1];
@@ -258,43 +220,43 @@ namespace Task1
             return new Polynomial(resultCoefficients);
         }
 
-        public static Polynomial operator *(Polynomial leftPl, Polynomial rightPl)
+        public static Polynomial operator *(Polynomial lhs, Polynomial rhs)
         {
-            if (leftPl == null || rightPl == null)
+            if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null))
                 return null;
 
-            double[] resultCoefficients = new double[leftPl.power + 1 + rightPl.power + 1];
+            double[] resultCoefficients = new double[lhs.power + 1 + rhs.power + 1];
 
-            for (int i = 0; i <= leftPl.power; i++)
-                for (int j = 0; j <= rightPl.power; j++)
-                    resultCoefficients[i + j] += leftPl.coefficients[i] * rightPl.coefficients[j];
+            for (int i = 0; i <= lhs.power; i++)
+                for (int j = 0; j <= rhs.power; j++)
+                    resultCoefficients[i + j] += lhs.coefficients[i] * rhs.coefficients[j];
 
             return new Polynomial(resultCoefficients);
         }
 
         /// <summary>
-        /// Adds the specified <paramref name="leftPl"/> with <paramref name="rightPl"/>.
+        /// Adds the specified <paramref name="lhs"/> with <paramref name="rhs"/>.
         /// </summary>
-        /// <param name="leftPl">The left <see cref="Polynomial"/>.</param>
-        /// <param name="rightPl">The right <see cref="Polynomial"/>.</param>
+        /// <param name="lhs">The left <see cref="Polynomial"/>.</param>
+        /// <param name="rhs">The right <see cref="Polynomial"/>.</param>
         /// <returns>Returns result of addition</returns>
-        public static Polynomial Add(Polynomial leftPl, Polynomial rightPl) => leftPl + rightPl;
+        public static Polynomial Add(Polynomial lhs, Polynomial rhs) => lhs + rhs;
 
         /// <summary>
-        /// Substracts the specified <paramref name="leftPl"/> from <paramref name="rightPl"/>.
+        /// Substracts the specified <paramref name="lhs"/> from <paramref name="rhs"/>.
         /// </summary>
-        /// <param name="leftPl">The left <see cref="Polynomial"/>.</param>
-        /// <param name="rightPl">The right <see cref="Polynomial"/>.</param>
+        /// <param name="lhs">The left <see cref="Polynomial"/>.</param>
+        /// <param name="rhs">The right <see cref="Polynomial"/>.</param>
         /// <returns>Returns result of subtraction.</returns>
-        public static Polynomial Subtract(Polynomial leftPl, Polynomial rightPl) => leftPl - rightPl;
+        public static Polynomial Subtract(Polynomial lhs, Polynomial rhs) => lhs - rhs;
 
         /// <summary>
-        /// Multiplies the specified <paramref name="leftPl"/> with <paramref name="rightPl"/>.
+        /// Multiplies the specified <paramref name="lhs"/> with <paramref name="rhs"/>.
         /// </summary>
-        /// <param name="leftPl">The left <see cref="Polynomial"/>.</param>
-        /// <param name="rightPl">The right <see cref="Polynomial"/>.</param>
+        /// <param name="lhs">The left <see cref="Polynomial"/>.</param>
+        /// <param name="rhs">The right <see cref="Polynomial"/>.</param>
         /// <returns>Returns result of multiplication</returns>
-        public static Polynomial Multiply(Polynomial leftPl, Polynomial rightPl) => leftPl * rightPl;
+        public static Polynomial Multiply(Polynomial lhs, Polynomial rhs) => lhs * rhs;
 
         public double this[int power]
         {
