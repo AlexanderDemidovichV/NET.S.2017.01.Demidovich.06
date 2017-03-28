@@ -19,10 +19,10 @@ namespace Task2
         /// </exception>
         public static void Sort(this int[][] array, IComparer<int[]> comparer)
         {
-            if (array == null)
+            if (ReferenceEquals(array, null))
                 throw new ArgumentNullException(nameof(array));
 
-            if (comparer == null)
+            if (ReferenceEquals(comparer, null))
                 throw new ArgumentNullException(nameof(comparer));
 
             for (int i = 0; i < array.Length; i++)
