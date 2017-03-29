@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Configuration;
 
 namespace Task1
 {
@@ -15,7 +16,7 @@ namespace Task1
 
         private readonly int power;
 
-        private const float Precision = 0.0000001f;
+        private static readonly double epsilon;
 
         #endregion
 
@@ -26,9 +27,29 @@ namespace Task1
         /// </summary>
         public int Power => power;
 
+        /// <summary>
+        /// Gets the epsilon of <see cref="Polynomial"/>.
+        /// </summary>
+        public double Epsilon => epsilon;
         #endregion  
 
         #region Constructors
+
+        static Polynomial()
+        {
+            try
+            {
+                epsilon = double.Parse(ConfigurationManager.AppSettings["epsilon"]);
+            }
+            catch (ConfigurationErrorsException ex)
+            {
+                throw new ConfigurationErrorsException("Can't get epsilon value", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ConfigurationErrorsException("epsilon has an invalid value", ex);
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Polynomial"/> class that is spcified by coefficients.
@@ -49,7 +70,7 @@ namespace Task1
 
             this.power = coefficients.Length - 1;
             for (int i = coefficients.Length - 1; i >= 0; i--)
-                if (i == 0 || Math.Abs(coefficients[i]) > Precision)
+                if (i == 0 || Math.Abs(coefficients[i]) > epsilon)
                 {
                     this.power = i;
                     break;
@@ -93,7 +114,7 @@ namespace Task1
             if (this.power != polynomial.Power) return false;
 
             for (int i = 0; i < this.power; i++)
-                if (Math.Abs(this.coefficients[i] - polynomial.coefficients[i]) > Precision)
+                if (Math.Abs(this.coefficients[i] - polynomial.coefficients[i]) > epsilon)
                     return false;
 
             return true;
@@ -137,7 +158,7 @@ namespace Task1
             int power = 0;
             for (int i = 0; i < coefficients.Length; i++)
             {
-                if (Math.Abs(coefficients[i]) < Precision)
+                if (Math.Abs(coefficients[i]) < epsilon)
                 {
                     power++;
                     continue;

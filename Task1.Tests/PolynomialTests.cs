@@ -8,7 +8,6 @@ namespace Task1.Tests
         [Test]
         public void Equals_oneObject_true_Returned()
         {
-
             Polynomial a = new Polynomial(1, 2, 3, 4, 5);
             bool expected = true;
 

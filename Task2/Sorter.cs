@@ -10,7 +10,7 @@ namespace Task2
         /// <summary>
         /// Sorts the elements in an jagged array using the specified Comparison.
         /// </summary>
-        /// <param name="array">The jagged, zero-based Array to sort.</param>
+        /// <param name="array">The jagged, zero-based array to sort.</param>
         /// <param name="comparer">The comparer to use when comparing elements.</param>
         /// <exception cref="System.ArgumentNullException">
         /// array is null
