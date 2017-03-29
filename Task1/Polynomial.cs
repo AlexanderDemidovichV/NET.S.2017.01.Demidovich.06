@@ -8,7 +8,7 @@ namespace Task1
     /// Represents immutable polinomials.
     /// </summary>
     /// <seealso cref="System.ICloneable" />
-    public class Polynomial: ICloneable
+    public sealed class Polynomial: ICloneable
     {
         #region Fields
 
@@ -30,7 +30,7 @@ namespace Task1
         /// <summary>
         /// Gets the epsilon of <see cref="Polynomial"/>.
         /// </summary>
-        public double Epsilon => epsilon;
+        public static double Epsilon => epsilon;
         #endregion  
 
         #region Constructors
@@ -54,7 +54,7 @@ namespace Task1
         /// <summary>
         /// Initializes a new instance of the <see cref="Polynomial"/> class that is spcified by coefficients.
         /// </summary>
-        /// <param name="coefficients">Coefficients of polynomial, index is power of polinomal element.</param>
+        /// <param name="coefficients">Coefficients of other, index is power of polinomal element.</param>
         /// <exception cref="System.ArgumentNullException"><paramref name="coefficients"/> is null</exception>
         public Polynomial(params double[] coefficients)
         {
@@ -84,7 +84,7 @@ namespace Task1
         #region Public Methods
 
         /// <summary>
-        /// Computes polynomial with specified number.
+        /// Computes other with specified number.
         /// </summary>
         /// <param name="x">A specified number.</param>
         /// <returns></returns>
@@ -103,18 +103,18 @@ namespace Task1
         /// <summary>
         /// Determines whether this instance and object which must be also <see cref="Polynomial"/>, have same value.
         /// </summary>
-        /// <param name="polynomial"><see cref="Polynomial"/> to compare with the current <see cref="Polynomial"/>.</param>
+        /// <param name="other"><see cref="Polynomial"/> to compare with the current <see cref="Polynomial"/>.</param>
         /// <returns> 
         /// <c>true</c> if the specified <see cref="Polynomial"/> is equal to the current object; otherwise, <c>false</c>.
         /// </returns>
-        public bool Equals(Polynomial polynomial)
+        public bool Equals(Polynomial other)
         {
-            if (ReferenceEquals(polynomial, null)) return false;
-            if (ReferenceEquals(this, polynomial)) return true;
-            if (this.power != polynomial.Power) return false;
+            if (ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            if (this.power != other.Power) return false;
 
-            for (int i = 0; i < this.power; i++)
-                if (Math.Abs(this.coefficients[i] - polynomial.coefficients[i]) > epsilon)
+            for (int i = 0; i < this.coefficients.Length; i++)
+                if (!this.coefficients[i].Equals(other.coefficients[i]))
                     return false;
 
             return true;
@@ -127,7 +127,12 @@ namespace Task1
         /// <returns>
         ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj) => this.Equals(obj as Polynomial);
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != this.GetType())
+                return false;
+            return Equals((Polynomial)obj);
+        }
 
         /// <summary>
         /// Returns a hash code for this instance.
@@ -184,6 +189,8 @@ namespace Task1
                 return true;
             if (ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null))
                 return false;
+            if (ReferenceEquals(lhs, rhs))
+                return true;
 
             return lhs.Equals(lhs);
         }
