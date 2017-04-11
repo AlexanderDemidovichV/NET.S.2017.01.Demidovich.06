@@ -64,7 +64,7 @@ namespace Task1
             if (coefficients.Length == 0)
             {
                 this.power = 0;
-                this.coefficients = null;
+                this.coefficients = new double[] {};
                 return;
             }
 
@@ -129,6 +129,9 @@ namespace Task1
         /// </returns>
         public override bool Equals(object obj)
         {
+            if (ReferenceEquals(obj, null)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+
             if (obj.GetType() != this.GetType())
                 return false;
             return Equals((Polynomial)obj);

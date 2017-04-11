@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task2
 {
@@ -37,7 +38,9 @@ namespace Task2
                 if (isSwap == false)
                     break;
             }
-        }   
+        }
+
+        public static void Sort(this int[][] array, Comparison<int[]> comparison) => Sort(array, Comparer<int[]>.Create(comparison));
 
         private static void Swap<T>(ref T lhs, ref T rhs)
         {
