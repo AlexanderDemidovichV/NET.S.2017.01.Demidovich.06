@@ -6,8 +6,21 @@ using System.Threading.Tasks;
 
 namespace Task2
 {
+    /// <summary>
+    /// Provides static sort methods.
+    /// </summary>
     public static class JaggedArraySorter
     {
+        /// <summary>
+        /// Sorts the elements in an jagged array using the specified Comparison.
+        /// </summary>
+        /// <param name="array">The jagged, zero-based array to sort.</param>
+        /// <param name="comparison">The comparison to use when comparing elements.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// array is null
+        /// or
+        /// comparer is null
+        /// </exception>
         public static void Sort(this int[][] array, Comparison<int[]> comparison)
         {
             if (ReferenceEquals(array, null))
@@ -31,6 +44,16 @@ namespace Task2
             var a = new { };
         }
 
+        /// <summary>
+        /// Sorts the elements in an jagged array using the specified Comparison.
+        /// </summary>
+        /// <param name="array">The jagged, zero-based array to sort.</param>
+        /// <param name="comparer">The comparer to use when comparing elements.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// array is null
+        /// or
+        /// comparer is null
+        /// </exception>
         public static void Sort(this int[][] array, IComparer<int[]> comparer)
         {
             if (ReferenceEquals(comparer, null))

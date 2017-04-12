@@ -40,7 +40,23 @@ namespace Task2
             }
         }
 
-        public static void Sort(this int[][] array, Comparison<int[]> comparison) => Sort(array, Comparer<int[]>.Create(comparison));
+        /// <summary>
+        /// Sorts the elements in an jagged array using the specified Comparison.
+        /// </summary>
+        /// <param name="array">The jagged, zero-based array to sort.</param>
+        /// <param name="comparison">The comparison to use when comparing elements.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// array is null
+        /// or
+        /// comparer is null
+        /// </exception>
+        public static void Sort(this int[][] array, Comparison<int[]> comparison)
+        {
+            if (ReferenceEquals(comparison, null))
+                throw new ArgumentNullException($"{nameof(comparison)} is null.");
+
+            Sort(array, Comparer<int[]>.Create(comparison));
+        }
 
         private static void Swap<T>(ref T lhs, ref T rhs)
         {
