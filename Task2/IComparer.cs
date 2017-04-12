@@ -10,7 +10,7 @@ namespace Task2
     /// Defines a method that a type implements to compare two objects.
     /// </summary>
     /// <typeparam name="T">The type of objects to compare.</typeparam>
-    public interface IComparer2<in T>
+    public interface IComparer<in T>
     {
         /// <summary>
         /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.

@@ -9,7 +9,7 @@ namespace Task2
     /// <summary>
     /// Provides static sort methods.
     /// </summary>
-    public static class JaggedArraySorter
+    public static class SorterMirror
     {
         /// <summary>
         /// Sorts the elements in an jagged array using the specified Comparison.

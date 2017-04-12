@@ -18,7 +18,7 @@ namespace Task2
         /// or
         /// comparer is null
         /// </exception>
-        public static void Sort(this int[][] array, IComparer<int[]> comparer)
+        public static void Sort(this int[][] array, System.Collections.Generic.IComparer<int[]> comparer)
         {
             if (ReferenceEquals(array, null))
                 throw new ArgumentNullException(nameof(array));
