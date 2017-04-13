@@ -18,7 +18,7 @@ namespace Task2
         /// or
         /// comparer is null
         /// </exception>
-        public static void Sort(this int[][] array, System.Collections.Generic.IComparer<int[]> comparer)
+        public static void Sort(this int[][] array, IComparer<int[]> comparer)
         {
             if (ReferenceEquals(array, null))
                 throw new ArgumentNullException(nameof(array));
@@ -55,7 +55,7 @@ namespace Task2
             if (ReferenceEquals(comparison, null))
                 throw new ArgumentNullException($"{nameof(comparison)} is null.");
 
-            Sort(array, Comparer<int[]>.Create(comparison));
+            Sort(array, new ComparisonAdaptor(comparison));
         }
 
         private static void Swap<T>(ref T lhs, ref T rhs)
