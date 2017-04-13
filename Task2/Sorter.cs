@@ -55,7 +55,7 @@ namespace Task2
             if (ReferenceEquals(comparison, null))
                 throw new ArgumentNullException($"{nameof(comparison)} is null.");
 
-            Sort(array, new ComparisonAdaptor(comparison));
+            Sort(array, new ComparisonAdaptor<int[]>(comparison));
         }
 
         private static void Swap<T>(ref T lhs, ref T rhs)
