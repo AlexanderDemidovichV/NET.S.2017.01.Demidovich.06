@@ -8,7 +8,8 @@ namespace Task2
 {
     public class ComparisonAdaptor<T>: IComparer<T>
     {
-        private Comparison<T> comparison;
+
+        private readonly Comparison<T> comparison;
 
         public ComparisonAdaptor(Comparison<T> comparison)
         {
@@ -17,6 +18,7 @@ namespace Task2
 
             this.comparison = comparison;
         }
+
         public int Compare(T lhs, T rhs) => comparison(lhs, rhs);
     }
 }
